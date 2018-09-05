@@ -1,0 +1,31 @@
+
+{% extends "base.html" %}
+
+{% block title %}{{ info.title }} - ТЕМА: Outdoor Style {% endblock %}
+
+{% block keywords %}ТЕМА{% for art in arts %} ,{{ art.title }}{% endfor %}{% endblock %}
+
+{% block body %}
+  <body onload="menu_start_open()">
+{% endblock %}
+
+{% block left_menu %}
+       <div class="left_menu">
+           <div id="left_menu_text">
+           <span onclick="menu_do(this.id)" class="button_2" id="1">Статьи</span><br><ul>
+               {% for art in arts %}
+               <li>                  
+                  <span class="text_left"><a href="/tech/article/{{ art.id }}">{{ art.title }}</a></span>
+               </li>
+             {% endfor %}</ul><br>
+           </div>
+       </div>
+{% endblock %}
+
+
+{% block content %}
+  <div class="content_text">
+    <br><h2>{{ info.title }}</h2>
+    <br>{{ info.body|safe }}
+  </div>
+{% endblock %}

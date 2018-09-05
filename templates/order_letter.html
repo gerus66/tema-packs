@@ -1,0 +1,26 @@
+Здравствуйте{% if name %}, {{ name }}{% endif %}!<br/>
+Спасибо за ваш заказ в <a href="www.eonve.ru">интернет-магазине Тема</a>.<br/>
+Ваш заказ номер <b>{{ id }}</b>:
+<table style="padding: 10px;" cellspacing="0" cellpadding="0" border="0">
+    <tr>
+        <td style="padding: 8px; border: 1px solid grey;"></td>
+        <td style="padding: 8px; border: 1px solid grey;">Бренд</td>
+        <td style="padding: 8px; border: 1px solid grey;"></td>
+        <td style="padding: 8px; border: 1px solid grey;">Цена за шт.</td>
+    </tr>
+    {% for g in goods %}
+    <tr>
+        <td style="padding: 8px; border: 1px solid grey;"><a href="www.eonve.ru/good/{{ g.id }}/">{{ g.name }}</a></td>
+        <td style="padding: 8px; border: 1px solid grey;">{{ g.brand.name }}</td>
+        <td style="padding: 8px; border: 1px solid grey;">{{ g.qty }} шт.</td>
+        <td style="padding: 8px; border: 1px solid grey;">{{ g.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br/>
+<b>Итого</b>: {{ count }} шт. на <b>{{ total }}</b> р.<br/><br/>
+{% if user_comment %}Ваш комментарий:<br/>
+<div style="padding: 8px; border: 1px solid grey;">{{ user_comment }}</div>
+{% endif %}
+
+В ближайшее время мы с Вами свяжемся и обсудим все детали доставки!

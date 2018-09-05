@@ -1,0 +1,10 @@
+
+{% extends "base.html" %}
+
+{% block title %}Статьи - ТЕМА: Outdoor Style{% endblock %}
+
+{% block keywords %}ТЕМА{% for art in arts %} ,{{ art.title }}{% endfor %}{% endblock %}
+
+{% block content %}
+    <p>{{ a.abstract|safe }}</p>
+{% endblock %}

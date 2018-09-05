@@ -1,0 +1,11 @@
+
+{% extends "base.html" %}
+
+{% block title %}О Доставке - ТЕМА: Outdoor Style{% endblock %}
+
+{% block content %}
+{% for inf in info %}
+<p>{{ inf.title|safe }}</p>
+<p>{{ inf.body|safe }}</p>
+{% endfor %}
+{% endblock %}

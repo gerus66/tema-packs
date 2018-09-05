@@ -1,0 +1,23 @@
+
+{% load thumbnail %}
+<table>
+{% if gs %}
+    {% for g in gs %}
+    <tr>
+		{% thumbnail g.image_set.all.0.photo "50x50" as thumb %}
+        <td><a href="/good/{{ g.id }}"><img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ good.name }}" /></a></td>   
+	    {% endthumbnail %}
+		<td><a href="/good/{{ g.id }}">{{ g.name }}</a></td>
+	    <td>{{ g.price }} р.</td>
+		<td>{{ g.qty }} шт.</td>
+        <td><a href="/buy/{{ g.id }}"><img src="/img/plus.jpg" width="20" height="20"></a>
+		<br><a href="/delete/{{ g.id }}"><img src="/img/minus.jpg" width="20" height="20"></a>
+	    </td>
+	</tr>
+    {% endfor %}
+    <tr><td colspan="5">Итого: {{ s }} р. </td></tr>
+{% else %}
+    <tr><td>Ваша корзина пока что пуста</td></tr>
+{% endif %}
+</table>
+

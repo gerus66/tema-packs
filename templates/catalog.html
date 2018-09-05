@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block keywords %}купить, {{ P.name }}{% if C == '' %}{% else %}, {{ C.name }}{% endif %}{% if B == '' %}{% else %}, {{ B.name }}{% endif %}{% for g in gs %}, {{ g.name }}{% endfor %} {% endblock %}
+
+{% block title %}Купить {{ P.name }} {{ C.name }} {{ B.name }} - ТЕМА: Outdoor Style{% endblock %}
+
+{% block filter %}
+
+    <div id="filterw">
+    <p><span class="filtername">сортировать:</span> 
+    <span class="sortborder"><a class="{% if sort == '0' %} sort{% endif %}" href="/catalog/{{ P.id }}/{% if C == '' %}0{% else %}{{ C.id }}{% endif %}/{% if B == '' %}0{% else %}{{ B.id }}{% endif %}/0/">по названию</a></span><span class="{% if P.id == 80 %}sortborder{% endif %}"><a class="{% if sort == '1' %} sort{% endif %}" href="/catalog/{{ P.id }}/{% if C == '' %}0{% else %}{{ C.id }}{% endif %}/{% if B == '' %}0{% else %}{{ B.id }}{% endif %}/1/">по цене</a></span>{% if P.id == 80 %}<span class="sortborder"><a class="{% if sort == '2' %} sort{% endif %}" href="/catalog/{{ P.id }}/{% if C == '' %}0{% else %}{{ C.id }}{% endif %}/{% if B == '' %}0{% else %}{{ B.id }}{% endif %}/2/">по объему</a></span><span><a class="{% if sort == '3' %}sort{% endif %}" href="/catalog/{{ P.id }}/{% if C == '' %}0{% else %}{{ C.id }}{% endif %}/{% if B == '' %}0{% else %}{{ B.id }}{% endif %}/3/">по весу</a></span>{% endif %}
+    </p>
+    <p><span class="filtername">фильтр по брендам:</span>
+    {% for br in brds %}<span class="sortborder"><a class="{% if br.id == B.id %} sort{% endif %}" href="/catalog/{{ P.id }}/{% if C == '' %}0{% else %}{{ C.id }}{% endif %}/{{ br.id }}/{{ sort }}/">{{ br.name }}</a></span>{% endfor %}<span><a class="{% if B == '' %} sort{% endif %}" href="/catalog/{{ P.id }}/{% if C == '' %}0{% else %}{{ C.id }}{% endif %}/0/{{ sort }}/">все</a></span>
+	</p>
+    <p><span class="filtername">фильтр по категориям:</span>
+    {% for ch in chs %}<span class="sortborder"><a class="{% if ch.id == C.id %} sort{% endif %}" href="/catalog/{{ P.id }}/{{ ch.id }}/{% if B == '' %}0{% else %}{{ B.id }}{% endif %}/{{ sort }}/">{{ ch.name }}</a></span>{% endfor %}<span><a class="{% if C == '' %} sort{% endif %}" href="/catalog/{{ P.id }}/0/{% if B == '' %}0{% else %}{{ B.id }}{% endif %}/{{ sort }}/">все</a></span>
+	</p>
+	</div>
+{% endblock %}
+
+{% block content %}
+
+
+  <table id="catalog">
+      <caption>{{ P.name }}{% if C == '' %}{% else %} - {{ C.name }}{% endif %}{% if B == '' %}{% else %} - {{ B.name }}{% endif %}
+          <br><span class="text">{{ C.articles.all.0.texts.all.0.body|safe }}</span></caption>
+	  <colgroup span="4" width="210">
+      {% for good in gs %}
+         {% if forloop.first %}<tr>{% endif %}
+         {% if good == '' %}
+              </tr><tr>              
+         {% else %}
+         <td><span class="catalogprice">{{ good.price }} р.</span><a class="catalogbuy" href="/buy/{{ good.id }}"><img src="/img/cart2.png" height="15" width="30"></a><br>
+                 <a href="/good/{{ good.id }}">{% thumbnail good.image_set.all.0.photo "150x150" as thumb %}<img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ good.name }}" />{% endthumbnail %}<br>{{ good.name }}</a>
+                 <br><span class="inf">{% if C == '' %}{{ good.category }}{% if B = '' %}<br>{% endif %}{% endif %}{% if B == '' %}{{ good.brand }}{% endif %}</span></td>
+         {% endif %}
+         {% if forloop.last %}</tr>{% endif %}
+      {% endfor %}
+  </table>
+{% endblock %}

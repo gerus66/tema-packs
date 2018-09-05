@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block title %}Моя корзина - Тема: Outdoor Style{% endblock %}
+
+{% block content %}
+    <div class="baskettext">Оформление заказа</div>
+{% if ww %}<p>{{ ww }}</p>{% else %}
+<table id="basketwrapper">
+<colgroup span="2" width="470">
+<tr>
+<td id="basket">
+    <!--# include virtual = "/minibasket/" -->	
+</td>
+<td>
+<span class="z">{{ w }}</span>
+<form action="/order/" method="POST">
+    <label for="name"><b><span class="z">*</span>Имя:</b><input name="name" value="{{ name }}" type="text"></label>
+    <label for="name_1"><b>Фамилия:</b><input name="name_1" value="{{ name_1 }}" type="text"></label>
+    <label for="name_2"><b>Отчество:</b><input name="name_2" value="{{ name_2 }}" type="text"></label>
+    <label for="phone"><b><span class="z">*</span>Телефон:</b><input name="phone" value="{{ phone }}" type="text"></label>
+    <label for="email"><b><span class="z">*</span>Email:</b><input name="email" value="{{ email }}" type="text"></label>
+    <label for="adress"><b><span class="z">*</span>Адрес:</b><textarea name="adress" value="{{ adress }}"  rows="5" cols="20"></textarea></label>
+    <label for="comments"><b>Комментарий:</b><textarea name="comments" value="{{ comments }}" rows="6" cols="20"></textarea></label>
+    <input value="Отправить заказ!" type="submit" name="order"/>
+</form>
+</td>
+</tr>
+</table>
+{% endif %}
+    <div class="baskettext">Спасибо за то, что выбрали наш магазин!<br>Мы свяжемся с Вами в ближайшее время и предложим удобные для Вас варианты доставки. </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block keywords %}{% if C.parent %}{{ C.parent }}, {% endif %}{{ C.name }}, {{ B.name }}{% for g in gs %}, {{ g.name }}{% endfor %} {% endblock %}
+
+{% block title %}{% if C.parent %}{{ C.parent }} {% endif %}{{ C.name }} {{ B.name }} - ТЕМА: Outdoor Style{% endblock %}
+
+{% block filter %}
+
+<div id="filterw">
+    <p>{% thumbnail B.articles.all.0.images.all.0.photo "30x30" as thumb %}<img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ good.name }}" />{% endthumbnail %} <span class="goodprice">{{ B.name }}</span></p>
+    <p>{{ B.articles.all.0.texts.all.0.body|safe }}</p>
+    <p><span class="filtername">сортировать:</span> 
+    <span class="sortborder"><a class="{% if sort == '0' %} sort{% endif %}" href="/brand/{{ B.id }}/0/">по названию</a></span><span class="sortborder"><a class="{% if sort == '1' %} sort{% endif %}" href="/brand/{{ B.id }}/1/">по цене</a></span><span><a class="{% if sort == '2' %} sort{% endif %}" href="/brand/{{ B.id }}/2/">по категории</a></span>
+    </p>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+
+  <table id="catalog">
+	  <colgroup span="4" width="210">
+      {% for good in gs %}
+         {% if forloop.first %}<tr>{% endif %}
+         {% if good == '' %}
+              </tr><tr>              
+         {% else %}
+         <td><span class="catalogprice">{{ good.price }} р.</span><a class="catalogbuy" href="/buy/{{ good.id }}"><img src="/img/cart2.png" height="15" width="30"></a><br>
+                 <a href="/good/{{ good.id }}">{% thumbnail good.image_set.all.0.photo "150x150" as thumb %}<img src="{{ thumb.url }}" width="{{ thumb.width }}" height="{{ thumb.height }}" alt="{{ good.name }}" />{% endthumbnail %}<br>{{ good.name }}</a>
+				 <br><span class="inf">{{ good.category }}</span></td>
+         {% endif %}
+         {% if forloop.last %}</tr>{% endif %}
+      {% endfor %}
+  </table>
+{% endblock %}

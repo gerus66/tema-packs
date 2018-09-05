@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+
+{% block title %}Рюкзаки и сумки - ТЕМА: Outdoor Style{% endblock %}
+
+{% block keywords %}купить {% for pr in prs %} ,{{ pr.name }}{% endfor %}{% for cat in cats %} ,{{ cat.name }}{% endfor %}{% for br in brs %} ,{{ br.name }}{% endfor %}{% endblock %}
+
+{% block content %}
+<p>{{ a.name|safe }}</p>
+{% for inf in info %}
+<p>
+    <span>{{ inf.title|safe }}</span>
+    <span class="underlined">{{ inf.body|safe }}</span>
+</p>
+{% endfor %}
+<div style="padding-left:50px; padding-top:50px"><script type="text/javascript" src="//vk.com/js/api/openapi.js?88"></script><div id="vk_groups"></div><script type="text/javascript">VK.Widgets.Group("vk_groups", {mode: 1, width: "180", height: "350"}, 15912680);</script></div>
+</p></p>
+{% endblock %}
+

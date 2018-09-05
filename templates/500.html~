@@ -1,0 +1,8 @@
+
+{% extends "base.html" %}
+
+{% block title %}Контакты - ТЕМА: Outdoor Style{% endblock %}
+
+{% block content %}
+ <h2>Page unavaliavle. You're SO fucking unlucky!..</h>
+{% endblock %}

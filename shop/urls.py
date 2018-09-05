@@ -1,0 +1,21 @@
+from django.conf.urls.defaults import *
+
+urlpatterns = patterns('',
+    (r'^/?$', 'packs.shop.views.index'),
+    (r'^delivery/?$', 'packs.shop.views.delivery'),
+    (r'^contacts/?$', 'packs.shop.views.contacts'),
+    (r'^basket/?$', 'packs.shop.views.basket'),
+    (r'^basket/1/?$', 'packs.shop.views.order_made'),
+    (r'^basket/2/?$', 'packs.shop.views.order_not_made'),
+    (r'^buy/(\d+)/?$', 'packs.shop.views.buy'),
+    (r'^delete/(\d+)/?$', 'packs.shop.views.delete'),
+    (r'^order/?$', 'packs.shop.views.order'),
+    (r'^tech/?$', 'packs.shop.views.tech'),
+    (r'^tech/article/(\d+)/?$', 'packs.shop.views.tech_art'),
+    (r'^catalog/(\d+)/(\d+)/(\d+)/(\d+)/?$', 'packs.shop.views.catalog'),
+    (r'^brand/(\d+)/(\d+)/?$', 'packs.shop.views.brand'),
+    (r'^good/(\d+)/?$', 'packs.shop.views.good'),
+    (r'^minibasket/?$', 'packs.shop.views.minibasket'),
+    (r'^minibasketq/?$', 'packs.shop.views.minibasketq'),
+    (r'^minibasketbuy/?$', 'packs.shop.views.minibasketbuy'),
+)
